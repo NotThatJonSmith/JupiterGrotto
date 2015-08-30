@@ -3,10 +3,11 @@
 
 static const float SCALE = 30.f;
 
-struct GameObjectDef {
-
+class GameObjectDef {
+public:
 	sf::Texture * texture;
-	b2PolygonShape * shape;
+	int vertexCount;
+	sf::Vector2<int> * vertices;
 	b2World * world;
 	sf::Vector2<int> origin;
 	sf::Vector2<int> position;
@@ -16,7 +17,8 @@ struct GameObjectDef {
 
 	GameObjectDef() :
 		texture(nullptr),
-		shape(nullptr),
+		vertexCount(0),
+		vertices(nullptr),
 		world(nullptr),
 		origin(sf::Vector2<int>(0, 0)),
 		position(sf::Vector2<int>(0, 0)),

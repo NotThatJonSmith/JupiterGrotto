@@ -31,11 +31,12 @@ int main() {
 	groundDef.world = &World;
 	groundDef.origin = sf::Vector2<int>(800, 8);
 	groundDef.position = sf::Vector2<int>(800, 800);
-
-	// Well, except for the Shape parameter.... more on that later
-	b2PolygonShape groundShape;
-	groundShape.SetAsBox(800.f / SCALE,8.f / SCALE);
-	groundDef.shape = &groundShape;
+	groundDef.vertexCount = 4;
+	groundDef.vertices = new sf::Vector2<int>[groundDef.vertexCount];
+	groundDef.vertices[0] = sf::Vector2<int>(-800, 8);
+	groundDef.vertices[1] = sf::Vector2<int>(-800, -8);
+	groundDef.vertices[2] = sf::Vector2<int>(800, -8);
+	groundDef.vertices[3] = sf::Vector2<int>(800, 8);
 
 	GameObjectDef boxDef;
 	boxDef.texture = manager.get<sf::Texture>("box.png");
@@ -45,9 +46,12 @@ int main() {
 	boxDef.world = &World;
 	boxDef.origin = sf::Vector2<int>(16, 16);
 	boxDef.position = sf::Vector2<int>(0, 0);
-	b2PolygonShape boxShape;
-	boxShape.SetAsBox(16.f / SCALE, 16.f / SCALE);
-	boxDef.shape = &boxShape;
+	boxDef.vertexCount = 4;
+	boxDef.vertices = new sf::Vector2<int>[boxDef.vertexCount];
+	boxDef.vertices[0] = sf::Vector2<int>(-16, 16);
+	boxDef.vertices[1] = sf::Vector2<int>(-16, -16);
+	boxDef.vertices[2] = sf::Vector2<int>(16, -16);
+	boxDef.vertices[3] = sf::Vector2<int>(16, 16);
 
 	// Actually make the ground object
 	GameObject groundObject(groundDef);
@@ -79,5 +83,9 @@ int main() {
 			it->draw(Window);
 		Window.display();
 	}
+
+	delete groundDef.vertices;
+	delete boxDef.vertices;
+
 	return 0;
 }
