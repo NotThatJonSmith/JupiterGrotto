@@ -1,14 +1,8 @@
 #include "ResourceManager.h"
+#include "GameObjectDef.h"
 
-ResourceManager::ResourceManager() : resDir("res/") {}
-
-ResourceManager::ResourceManager(std::string arg_resDir) {
-	resDir = arg_resDir;
-}
-
-ResourceManager::~ResourceManager() {
-	unloadAllResources();
-}
+std::string ResourceManager::resDir = "res/";
+std::unordered_map<std::string, void *> ResourceManager::resourceCache;
 
 // Type T *must* have loadFromFile
 template <typename T>
@@ -24,6 +18,7 @@ T * ResourceManager::get(std::string resName) {
 }
 
 template sf::Texture * ResourceManager::get(std::string);
+template GameObjectDef * ResourceManager::get(std::string);
 
 void ResourceManager::unloadAllResources() {
 	for (std::unordered_map<std::string, void *>::iterator it = resourceCache.begin();

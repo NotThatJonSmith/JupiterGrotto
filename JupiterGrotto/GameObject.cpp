@@ -2,7 +2,7 @@
 #include <Box2D\Box2D.h>
 #include "GameObject.h"
 
-GameObject::GameObject(GameObjectDef &def) {
+GameObject::GameObject(GameObjectDef &def, b2World &world) {
 
 	// Origin and texture are simple data members
 	origin = def.origin;
@@ -12,7 +12,7 @@ GameObject::GameObject(GameObjectDef &def) {
 	b2BodyDef BodyDef;
 	BodyDef.position = b2Vec2(def.position.x / SCALE, def.position.y / SCALE);
 	BodyDef.type = def.dynamic ? b2_dynamicBody : b2_staticBody;
-	body = def.world->CreateBody(&BodyDef);
+	body = world.CreateBody(&BodyDef);
 
 	// Convert from sf::Vector2 to b2Vec2 with SCALE to set up the shape
 	b2Vec2 * vertices = new b2Vec2[def.vertexCount];
