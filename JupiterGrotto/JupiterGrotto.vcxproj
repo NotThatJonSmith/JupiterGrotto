@@ -164,13 +164,14 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectDef.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Controller.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectDef.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
