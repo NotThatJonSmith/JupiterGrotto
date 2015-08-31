@@ -3,15 +3,14 @@
 #include "ResourceManager.h"
 #include "rapidjson/document.h"
 
-GameObjectDef::GameObjectDef() :
-	texture(nullptr),
-	vertexCount(0),
-	vertices(nullptr),
-	origin(sf::Vector2<float>(0, 0)),
-	position(sf::Vector2<int>(0, 0)),
-	friction(0.0f),
-	density(0.0f),
-	dynamic(false) {}
+GameObjectDef::GameObjectDef() : texture(nullptr),
+								 vertexCount(0),
+								 vertices(nullptr),
+								 origin(sf::Vector2<float>(0, 0)),
+								 position(sf::Vector2<int>(0, 0)),
+								 friction(0.0f),
+								 density(0.0f),
+								 dynamic(false) {}
 
 GameObjectDef::~GameObjectDef() {
 	if (vertices != nullptr)

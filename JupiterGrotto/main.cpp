@@ -5,13 +5,15 @@
 #include "GameObjectDef.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "View.h"
 
 int main() {
 
-	// Set up the SFML window, Box2D world, and object list
-	sf::RenderWindow Window(sf::VideoMode(1600, 1200, 32), "JupiterGrotto");
-	Window.setFramerateLimit(60);
-	b2Vec2 Gravity(0.f, 9.8f);
+	// Construct a default view.
+	View view;
+
+	// Model should contain the b2World and object list
+	b2Vec2 Gravity(0.f, 9.81f);
 	b2World World(Gravity);
 	std::list<GameObject> ObjectList;
 
@@ -24,26 +26,24 @@ int main() {
 	ObjectList.push_back(groundObject);
 
 	// Main game loop
-	while (Window.isOpen()) {
+	while (view.isActive()) {
 
-		// Listen for the window close event
-		sf::Event event;
-		while (Window.pollEvent(event))
-			if (event.type == sf::Event::Closed)
-				Window.close();
-
-		// If the mouse button is down, add more boxes
+		// If the mouse button is down, add more boxes. Should go in a controller
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			boxDef->position = sf::Vector2<int>(sf::Mouse::getPosition(Window).x, sf::Mouse::getPosition(Window).y);
+			boxDef->position = view.getMousePosition();
 			ObjectList.push_back(GameObject(*boxDef, World));
+		}
+
+		// Right mouse toggles gravity!
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+			World.SetGravity(b2Vec2((World.GetGravity() == b2Vec2(0.f, 9.81f)) ? b2Vec2(0.f, 0.f) : b2Vec2(0.f, 9.81f)));
 		}
 
 		// Step physics and graphics forward
 		World.Step(1 / 60.f, 8, 3);
-		Window.clear(sf::Color::White);
-		for (std::list<GameObject>::iterator it = ObjectList.begin(); it != ObjectList.end(); it++)
-			it->draw(Window);
-		Window.display();
+		view.update(ObjectList);
+
+		// ULTIMATE GOAL: view.show(model.update(controller));
 	}
 	return 0;
 }

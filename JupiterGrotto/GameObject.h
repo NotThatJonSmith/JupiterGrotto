@@ -6,6 +6,7 @@
 static const float SCALE = 30.f;
 
 class GameObject {
+	friend class View;
 private:
 	sf::Texture * texture;
 	b2Body * body;
