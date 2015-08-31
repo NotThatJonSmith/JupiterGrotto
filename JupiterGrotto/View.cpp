@@ -25,6 +25,9 @@ void View::update(std::list<GameObject> &objects) {
 	while (window->pollEvent(event))
 		if (event.type == sf::Event::Closed)
 			window->close();
+		else if (event.type == sf::Event::Resized) {
+			window->setSize(sf::Vector2<unsigned int>(event.size.width, event.size.height));
+		}
 
 	window->clear(bgColor);
 	for (std::list<GameObject>::iterator it = objects.begin(); it != objects.end(); it++) {
@@ -40,5 +43,5 @@ void View::update(std::list<GameObject> &objects) {
 }
 
 sf::Vector2<int> View::getMousePosition() {
-	return sf::Vector2<int>(sf::Mouse::getPosition(*window).x, sf::Mouse::getPosition(*window).y);
+	return sf::Vector2<int>(sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
 }

@@ -168,6 +168,7 @@
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectDef.h" />
     <ClInclude Include="ResourceManager.h" />

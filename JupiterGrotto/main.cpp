@@ -24,7 +24,7 @@ int main() {
 	// Create a ground object
 	GameObject groundObject(*groundDef, World);
 	ObjectList.push_back(groundObject);
-
+	bool w, a, s, d; w = false; a = false; s = false; d = false;
 	// Main game loop
 	while (view.isActive()) {
 
@@ -38,6 +38,31 @@ int main() {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
 			World.SetGravity(b2Vec2((World.GetGravity() == b2Vec2(0.f, 9.81f)) ? b2Vec2(0.f, 0.f) : b2Vec2(0.f, 9.81f)));
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			if (!w) {
+				w = true;
+				view.origin.y -= 10;
+			}
+		} else w = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			if (!s) {
+				s = true;
+				view.origin.y += 10;
+			}
+		} else s = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+			if (!d) {
+				d = true;
+				view.origin.x += 10;
+			}
+		} else d = false;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+			if (!a) {
+				a = true;
+				view.origin.x -= 10;
+			}
+		} else a = false;
 
 		// Step physics and graphics forward
 		World.Step(1 / 60.f, 8, 3);
