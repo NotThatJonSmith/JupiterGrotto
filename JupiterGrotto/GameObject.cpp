@@ -29,12 +29,3 @@ GameObject::GameObject(GameObjectDef &def, b2World &world) {
 	body->CreateFixture(&FixtureDef);
 	delete[] vertices;
 }
-
-void GameObject::draw(sf::RenderWindow &window) {
-	sf::Sprite Sprite;
-	Sprite.setTexture(*texture);
-	Sprite.setOrigin(origin.x, origin.y);
-	Sprite.setPosition(SCALE * body->GetPosition().x, SCALE * body->GetPosition().y);
-	Sprite.setRotation(body->GetAngle() * 180 / b2_pi);
-	window.draw(Sprite);
-}

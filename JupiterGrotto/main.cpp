@@ -25,6 +25,7 @@ int main() {
 	GameObject groundObject(*groundDef, World);
 	ObjectList.push_back(groundObject);
 	bool w, a, s, d; w = false; a = false; s = false; d = false;
+
 	// Main game loop
 	while (view.isActive()) {
 

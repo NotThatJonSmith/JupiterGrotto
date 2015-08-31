@@ -13,5 +13,4 @@ private:
 	sf::Vector2<float> origin;
 public:
 	GameObject(GameObjectDef &def, b2World &world);
-	void draw(sf::RenderWindow &window);
 };

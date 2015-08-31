@@ -20,7 +20,7 @@ bool View::isActive() {
 
 void View::update(std::list<GameObject> &objects) {
 
-	// Listen for the window close event
+	// Listen for window events
 	sf::Event event;
 	while (window->pollEvent(event))
 		if (event.type == sf::Event::Closed)
