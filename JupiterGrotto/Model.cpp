@@ -1,12 +1,11 @@
-
 #include "Model.h"
 
-Model::Model() :
-world(b2Vec2(0.f, 0.f)) {
-}
+Model::Model() : world(b2Vec2(0.f, 0.f)) {}
 
-Model::~Model() {
-	//ToDO
+Model::~Model() {}
+
+void Model::loadFromFile(std::string fileName) {
+	rapidjson::Document jsonDom = JGUtils::getJsonDom(fileName);
 }
 
 void Model::update() {
@@ -17,7 +16,7 @@ void Model::setGravity(b2Vec2 gravity) {
 	world.SetGravity(gravity);
 }
 
-void Model::addObject(std::string name, sf::Vector2<int> pos) {
+void Model::addObject(std::string name, sf::Vector2<float> pos) {
 	GameObjectDef * def = ResourceManager::get<GameObjectDef>(name);
 	def->position = pos;
 	objects.push_back(GameObject(*def,world));

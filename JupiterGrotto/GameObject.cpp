@@ -1,31 +1,32 @@
 #include <SFML\Graphics.hpp>
 #include <Box2D\Box2D.h>
 #include "GameObject.h"
+#include "JGUtils.h"
 
 GameObject::GameObject(GameObjectDef &def, b2World &world) {
 
-	// Origin and texture are simple data members
 	origin = def.origin;
 	texture = def.texture;
 
-	// Construct a b2Body using dynamic, position, and world data members
 	b2BodyDef BodyDef;
-	BodyDef.position = b2Vec2(def.position.x / SCALE, def.position.y / SCALE);
+	BodyDef.position = JGUtils::sf2Box(def.position);
 	BodyDef.type = def.dynamic ? b2_dynamicBody : b2_staticBody;
 	body = world.CreateBody(&BodyDef);
 
-	// Convert from sf::Vector2 to b2Vec2 with SCALE to set up the shape
 	b2Vec2 * vertices = new b2Vec2[def.vertexCount];
 	for (int i = 0; i < def.vertexCount; i++)
-		vertices[i].Set(def.vertices[i].x / SCALE, def.vertices[i].y / SCALE);
+		vertices[i] = JGUtils::sf2Box(def.vertices[i]);
 	b2PolygonShape polygon;
 	polygon.Set(vertices, def.vertexCount);
+	delete[] vertices;
 
-	// Create and apply the fixture using the shape and other data members
 	b2FixtureDef FixtureDef;
 	FixtureDef.density = def.density;
 	FixtureDef.friction = def.friction;
 	FixtureDef.shape = &polygon;
 	body->CreateFixture(&FixtureDef);
-	delete[] vertices;
+}
+
+sf::Vector2f GameObject::getPosition() {
+	return JGUtils::box2Sf(body->GetPosition());
 }

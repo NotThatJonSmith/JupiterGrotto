@@ -4,7 +4,6 @@
 std::string ResourceManager::resDir = "res/";
 std::unordered_map<std::string, void *> ResourceManager::resourceCache;
 
-// Type T *must* have loadFromFile
 template <typename T>
 T * ResourceManager::get(std::string resName) {
 	std::unordered_map<std::string, void *>::iterator it = resourceCache.find(resName);
@@ -18,6 +17,7 @@ T * ResourceManager::get(std::string resName) {
 }
 
 template sf::Texture * ResourceManager::get(std::string);
+template sf::SoundBuffer * ResourceManager::get(std::string);
 template GameObjectDef * ResourceManager::get(std::string);
 
 void ResourceManager::unloadAllResources() {

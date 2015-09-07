@@ -1,7 +1,7 @@
 #include "GameObjectDef.h"
-#include <fstream>
 #include "ResourceManager.h"
 #include "rapidjson/document.h"
+#include "JGUtils.h"
 
 GameObjectDef::GameObjectDef() : texture(nullptr),
 								 vertexCount(0),
@@ -13,35 +13,25 @@ GameObjectDef::GameObjectDef() : texture(nullptr),
 								 dynamic(false) {}
 
 GameObjectDef::~GameObjectDef() {
-	if (vertices != nullptr)
-		delete[] vertices;
+	if (vertices != nullptr) delete[] vertices;
 }
 
 void GameObjectDef::loadFromFile(std::string fileName) {
-	std::ifstream ifs;
-	ifs.open(fileName, std::ifstream::in);
-	ifs.seekg(0, std::ios_base::end);
-	int len = ifs.tellg();
-	char * json = new char[len];
-	ifs.seekg(0, std::ios_base::beg);
-	ifs.get(json, len, '\0');
-	ifs.close();
-	rapidjson::Document dom;
-	dom.Parse(json);
-	texture = ResourceManager::get<sf::Texture>(dom["texture"].GetString());
-	friction = dom["friction"].GetDouble();
-	density = dom["density"].GetDouble();
-	dynamic = dom["dynamic"].GetBool();
-	origin = sf::Vector2<float>(dom["origin"][0].GetDouble(), dom["origin"][1].GetDouble());
-	position = sf::Vector2<int>(dom["position"][0].GetInt(), dom["position"][1].GetInt());
-	const rapidjson::Value& verts = dom["vertices"];
-	vertices = new sf::Vector2<int>[verts.Size()];
-	vertexCount = verts.Size();
-	for (rapidjson::SizeType i = 0; i < verts.Size(); i++)
-		vertices[i] = sf::Vector2<int>(verts[i][0].GetInt(), verts[i][1].GetInt());
-	delete[] json;
-}
 
-void GameObjectDef::saveToFile(std::string fileName) {
-	return;
+	rapidjson::Document jsonDom = JGUtils::getJsonDom(fileName);
+	
+	texture = ResourceManager::get<sf::Texture>(jsonDom["texture"].GetString());
+	friction = jsonDom["friction"].GetDouble();
+	density = jsonDom["density"].GetDouble();
+	dynamic = jsonDom["dynamic"].GetBool();
+	origin = sf::Vector2<float>(jsonDom["origin"][0].GetDouble(), jsonDom["origin"][1].GetDouble());
+	position = sf::Vector2<float>(jsonDom["position"][0].GetInt(), jsonDom["position"][1].GetDouble());
+
+	const rapidjson::Value& domVertices = jsonDom["vertices"];
+	vertices = new sf::Vector2<float>[domVertices.Size()];
+	vertexCount = domVertices.Size();
+
+	for (rapidjson::SizeType i = 0; i < domVertices.Size(); i++)
+		vertices[i] = sf::Vector2<float>(domVertices[i][0].GetInt(), domVertices[i][1].GetInt());
+
 }

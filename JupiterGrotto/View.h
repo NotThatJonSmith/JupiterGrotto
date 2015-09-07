@@ -1,6 +1,7 @@
 #include <SFML\Graphics.hpp>
 #include "Model.h"
 #include "GameObject.h"
+#include "JGUtils.h"
 class View {
 private:
 	sf::RenderWindow * window;
@@ -15,6 +16,6 @@ public:
 	~View();
 	void update(Model &model);
 	bool isActive();
-	sf::Vector2<int> getMousePosition();
+	sf::Vector2<float> getMousePosition();
 	
 };

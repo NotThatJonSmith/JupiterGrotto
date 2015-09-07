@@ -29,24 +29,21 @@ void View::update(Model &model) {
 	while (window->pollEvent(event))
 		if (event.type == sf::Event::Closed)
 			window->close();
-		else if (event.type == sf::Event::Resized) {
+		else if (event.type == sf::Event::Resized)
 			dimensions = sf::Vector2<float>((float)event.size.width, (float)event.size.height);
-		}
 
-
-	// Draw the window
 	window->clear(bgColor);
 	for (std::list<GameObject>::iterator it = model.objects.begin(); it != model.objects.end(); it++) {
 		sf::Sprite Sprite;
 		Sprite.setTexture(*(it->texture));
 		Sprite.setOrigin(it->origin.x, it->origin.y);
-		Sprite.setPosition(SCALE * it->body->GetPosition().x, SCALE * it->body->GetPosition().y);
+		Sprite.setPosition(it->getPosition());
 		Sprite.setRotation(it->body->GetAngle() * 180 / b2_pi);
 		window->draw(Sprite);
 	}
 	window->display();
 }
 
-sf::Vector2<int> View::getMousePosition() {
-	return sf::Vector2<int> (sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
+sf::Vector2<float> View::getMousePosition() {
+	return sf::Vector2<float> (sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
 }
