@@ -30,7 +30,7 @@ void View::update(Model &model) {
 		if (event.type == sf::Event::Closed)
 			window->close();
 		else if (event.type == sf::Event::Resized)
-			dimensions = sf::Vector2<float>((float)event.size.width, (float)event.size.height);
+			dimensions = sf::Vector2f((float)event.size.width, (float)event.size.height);
 
 	window->clear(bgColor);
 	for (std::list<GameObject>::iterator it = model.objects.begin(); it != model.objects.end(); it++) {
@@ -44,6 +44,6 @@ void View::update(Model &model) {
 	window->display();
 }
 
-sf::Vector2<float> View::getMousePosition() {
-	return sf::Vector2<float> (sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
+sf::Vector2f View::getMousePosition() {
+	return sf::Vector2f (sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
 }

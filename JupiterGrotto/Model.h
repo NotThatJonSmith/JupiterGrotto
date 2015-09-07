@@ -13,9 +13,9 @@ public:
 	~Model();
 	void setGravity(b2Vec2 grav);
 	void update();
-	void loadFromFile(std::string fileName); // will call addObject from a bunch of .god files
-	void addObject(std::string fileName, sf::Vector2<float> position);
-	//void removeObject(GameObject * obj); // need a good ID schemes
+	void loadFromFile(std::string fileName);
+	void addObject(std::string fileName, sf::Vector2f position);
+	//void removeObject(GameObject * obj);
 private:
 	b2World world;
 	std::list<GameObject> objects;

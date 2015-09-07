@@ -16,9 +16,9 @@ public:
 	LuaEngine();
 	~LuaEngine();
 	runScript(std::string);
-
+	/*
 	lua_State *L = luaL_newstate();
 	luaL_openlibs(L);
 	lua_close(L);
-
+	*/
 };
