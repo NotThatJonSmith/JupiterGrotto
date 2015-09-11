@@ -1,5 +1,5 @@
 #include "ResourceManager.h"
-#include "GameObject.h"
+#include "GameObjectDef.h"
 
 std::string ResourceManager::resDir = "res/";
 std::unordered_map<std::string, void *> ResourceManager::resourceCache;

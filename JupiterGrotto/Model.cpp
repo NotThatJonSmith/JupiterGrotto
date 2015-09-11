@@ -16,7 +16,8 @@ void Model::setGravity(b2Vec2 gravity) {
 	world.SetGravity(gravity);
 }
 
-//???
-void Model::addObject() {
-	objects.push_back();
+void Model::addObject(std::string name, sf::Vector2<float> pos) {
+	GameObjectDef * def = ResourceManager::get<GameObjectDef>(name);
+	def->position = pos;
+	objects.push_back(GameObject(*def,world));
 }

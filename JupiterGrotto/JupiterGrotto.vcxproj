@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectDef.cpp" />
     <ClCompile Include="JGUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectDef.h" />
     <ClInclude Include="JGUtils.h" />
     <ClInclude Include="LuaEngine.h" />
     <ClInclude Include="Model.h" />

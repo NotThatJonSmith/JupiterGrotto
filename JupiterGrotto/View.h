@@ -10,12 +10,12 @@ private:
 	int pixelDepth;
 	int fpsLimit;
 public:
-	sf::Vector2f origin;
-	sf::Vector2f dimensions;
+	sf::Vector2<float> origin;
+	sf::Vector2<float> dimensions;
 	View();
 	~View();
 	void update(Model &model);
 	bool isActive();
-	sf::Vector2f getMousePosition();
+	sf::Vector2<float> getMousePosition();
 	
 };
