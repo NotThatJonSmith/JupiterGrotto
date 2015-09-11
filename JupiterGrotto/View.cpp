@@ -20,6 +20,7 @@ bool View::isActive() {
 
 void View::update(Model &model) {
 
+	model.update();
 	sf::View winView = window->getView();
 	winView.setSize(dimensions);
 	winView.setCenter(origin.x + dimensions.x / 2, origin.y + dimensions.y / 2);
@@ -30,20 +31,20 @@ void View::update(Model &model) {
 		if (event.type == sf::Event::Closed)
 			window->close();
 		else if (event.type == sf::Event::Resized)
-			dimensions = sf::Vector2<float>((float)event.size.width, (float)event.size.height);
+			dimensions = sf::Vector2f((float)event.size.width, (float)event.size.height);
 
 	window->clear(bgColor);
-	for (std::list<GameObject>::iterator it = model.objects.begin(); it != model.objects.end(); it++) {
+	for (std::set<GameObject*>::iterator it = model.objects.begin(); it != model.objects.end(); it++) {
 		sf::Sprite Sprite;
-		Sprite.setTexture(*(it->texture));
-		Sprite.setOrigin(it->origin.x, it->origin.y);
-		Sprite.setPosition(it->getPosition());
-		Sprite.setRotation(it->body->GetAngle() * 180 / b2_pi);
+		Sprite.setTexture(*((*it)->getTexture()));
+		Sprite.setOrigin((*it)->getOrigin().x, (*it)->getOrigin().y);
+		Sprite.setPosition((*it)->getPosition());
+		Sprite.setRotation((*it)->getAngle());
 		window->draw(Sprite);
 	}
 	window->display();
 }
 
-sf::Vector2<float> View::getMousePosition() {
-	return sf::Vector2<float> (sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
+sf::Vector2f View::getMousePosition() {
+	return sf::Vector2f (sf::Mouse::getPosition(*window).x + origin.x, sf::Mouse::getPosition(*window).y + origin.y);
 }

@@ -2,20 +2,25 @@
 #include "Model.h"
 #include "GameObject.h"
 #include "JGUtils.h"
+
 class View {
+
 private:
+
+	sf::Vector2f origin;
+	sf::Vector2f dimensions;
 	sf::RenderWindow * window;
 	std::string title;
 	sf::Color bgColor;
 	int pixelDepth;
 	int fpsLimit;
+
 public:
-	sf::Vector2<float> origin;
-	sf::Vector2<float> dimensions;
+
 	View();
 	~View();
 	void update(Model &model);
 	bool isActive();
-	sf::Vector2<float> getMousePosition();
+	sf::Vector2f getMousePosition();
 	
 };

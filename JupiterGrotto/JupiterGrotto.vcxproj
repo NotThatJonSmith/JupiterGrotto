@@ -112,7 +112,7 @@
       <AdditionalDependencies>lua5.3.0.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-main-d.lib;Box2D-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>echo F|c:\windows\system32\xcopy.exe /Y $(ProjectDir)\bin\* $(OutDir)</Command>
+      <Command>echo F|c:\windows\system32\xcopy.exe /Y "$(ProjectDir)\bin\*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -157,12 +157,11 @@
       <AdditionalDependencies>lua5.3.0.lib;sfml-graphics.lib;sfml-audio.lib;sfml-network.lib;sfml-window.lib;sfml-system.lib;sfml-main.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>echo F|c:\windows\system32\xcopy.exe /Y $(ProjectDir)\bin\* $(OutDir)</Command>
+      <Command>echo F|c:\windows\system32\xcopy.exe /Y "$(ProjectDir)\bin\*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameObjectDef.cpp" />
     <ClCompile Include="JGUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -171,9 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectDef.h" />
     <ClInclude Include="JGUtils.h" />
-    <ClInclude Include="LuaEngine.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="View.h" />

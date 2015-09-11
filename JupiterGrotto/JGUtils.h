@@ -6,6 +6,6 @@ static const float SCALE = 30.f;
 
 namespace JGUtils {
 	rapidjson::Document getJsonDom(std::string fileName);
-	b2Vec2 sf2Box(sf::Vector2<float> sfVector);
-	sf::Vector2<float> box2Sf(b2Vec2 boxVector);
+	b2Vec2 sf2Box(sf::Vector2f sfVector);
+	sf::Vector2f box2Sf(b2Vec2 boxVector);
 }

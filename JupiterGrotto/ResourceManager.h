@@ -1,8 +1,6 @@
 #pragma once
 #include <cstdlib>
 #include <unordered_map>
-#include <SFML\Graphics.hpp>
-#include <SFML\Audio.hpp>
 
 class ResourceManager {
 private:

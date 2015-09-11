@@ -1,5 +1,7 @@
 #include "ResourceManager.h"
-#include "GameObjectDef.h"
+#include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
+#include "GameObject.h"
 
 std::string ResourceManager::resDir = "res/";
 std::unordered_map<std::string, void *> ResourceManager::resourceCache;
@@ -18,7 +20,7 @@ T * ResourceManager::get(std::string resName) {
 
 template sf::Texture * ResourceManager::get(std::string);
 template sf::SoundBuffer * ResourceManager::get(std::string);
-template GameObjectDef * ResourceManager::get(std::string);
+template GameObjectProperties * ResourceManager::get(std::string);
 
 void ResourceManager::unloadAllResources() {
 	for (std::unordered_map<std::string, void *>::iterator it = resourceCache.begin();
