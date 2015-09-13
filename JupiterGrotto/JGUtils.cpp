@@ -1,4 +1,3 @@
-
 #include "JGUtils.h"
 #include <fstream>
 namespace JGUtils {
@@ -12,7 +11,7 @@ namespace JGUtils {
 		jsonFile.seekg(0, std::ios_base::beg);
 
 		char * jsonBuffer = new char[bufferSize];
-		jsonFile.get(jsonBuffer, bufferSize, '\0');
+		jsonFile.get(jsonBuffer, bufferSize,'\0');
 		jsonFile.close();
 
 		rapidjson::Document jsonDom;

@@ -4,11 +4,9 @@
 #include "ResourceManager.h"
 #include "JGUtils.h"
 
-class GameObjectProperties {
+class BaseGameObject {
 
-	friend class GameObject;
-
-private:
+public:
 
 	sf::Texture * texture;
 	sf::Vector2f origin;
@@ -16,24 +14,22 @@ private:
 	float density;
 	float friction;
 	bool dynamic;
-
-public:
-
-	void loadFromFile(std::string fileName);
-
+	void loadFromFile(std::string baseObjectFileName);
+	BaseGameObject();
+	BaseGameObject(BaseGameObject &other);
+	
 };
 
-class GameObject {
-
-private:
-
-	GameObjectProperties properties;
+class GameObject : protected BaseGameObject {
 
 public:
 
-	b2Body * body; // Only public so Model can remove it from its world
+	b2Body * body;
 
-	GameObject(GameObjectProperties initialProperties);
+	GameObject();
+	GameObject & operator=(BaseGameObject &other);
+	GameObject(BaseGameObject &other);
+	
 	void startPhysics(b2World &world, sf::Vector2f position);
 
 	sf::Vector2f getPosition();
@@ -44,5 +40,4 @@ public:
 
 	sf::Texture * getTexture();
 	sf::Vector2f getOrigin();
-	
 };

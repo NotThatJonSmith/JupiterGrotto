@@ -20,7 +20,6 @@ bool View::isActive() {
 
 void View::update(Model &model) {
 
-	model.update();
 	sf::View winView = window->getView();
 	winView.setSize(dimensions);
 	winView.setCenter(origin.x + dimensions.x / 2, origin.y + dimensions.y / 2);
@@ -34,7 +33,7 @@ void View::update(Model &model) {
 			dimensions = sf::Vector2f((float)event.size.width, (float)event.size.height);
 
 	window->clear(bgColor);
-	for (std::set<GameObject*>::iterator it = model.objects.begin(); it != model.objects.end(); it++) {
+	for (std::set<GameObject*>::iterator it = model.objectsBegin(); it != model.objectsEnd(); it++) {
 		sf::Sprite Sprite;
 		Sprite.setTexture(*((*it)->getTexture()));
 		Sprite.setOrigin((*it)->getOrigin().x, (*it)->getOrigin().y);

@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-void GameObjectProperties::loadFromFile(std::string fileName) {
+void BaseGameObject::loadFromFile(std::string fileName) {
 
 	rapidjson::Document jsonDom = JGUtils::getJsonDom(fileName);
 
@@ -19,7 +19,23 @@ void GameObjectProperties::loadFromFile(std::string fileName) {
 	delete[] vertices;
 }
 
-GameObject::GameObject(GameObjectProperties initialProperties) : body(nullptr), properties(initialProperties) {
+GameObject::GameObject() : body(nullptr) {
+}
+
+BaseGameObject::BaseGameObject() {}
+
+GameObject& GameObject::operator=(BaseGameObject &other) {
+	texture = other.texture;
+	origin = other.origin;
+	shape = other.shape;
+	density = other.density;
+	friction = other.friction;
+	dynamic = other.dynamic;
+	return *this;
+}
+
+GameObject::GameObject(BaseGameObject &other) {
+	*this = other;
 }
 
 void GameObject::startPhysics(b2World &world, sf::Vector2f position) {
@@ -27,13 +43,13 @@ void GameObject::startPhysics(b2World &world, sf::Vector2f position) {
 	if (body != nullptr) world.DestroyBody(body);
 	b2BodyDef BodyDef;
 	BodyDef.position = JGUtils::sf2Box(position);
-	BodyDef.type = properties.dynamic ? b2_dynamicBody : b2_staticBody;
+	BodyDef.type = dynamic ? b2_dynamicBody : b2_staticBody;
 	body = world.CreateBody(&BodyDef);
 
 	b2FixtureDef FixtureDef;
-	FixtureDef.density = properties.density;
-	FixtureDef.friction = properties.friction;
-	FixtureDef.shape = &properties.shape;
+	FixtureDef.density = density;
+	FixtureDef.friction = friction;
+	FixtureDef.shape = &shape;
 	body->CreateFixture(&FixtureDef);
 }
 
@@ -54,9 +70,9 @@ void GameObject::setAngle(float angle) {
 }
 
 sf::Texture * GameObject::getTexture() {
-	return properties.texture;
+	return texture;
 }
 
 sf::Vector2f GameObject::getOrigin() {
-	return properties.origin;
+	return origin;
 }

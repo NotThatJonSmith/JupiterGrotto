@@ -7,14 +7,11 @@ int main() {
 	
 	Model model;
 	View view;
-
-	model.setGravity(b2Vec2(0.f, 9.81f));
-	model.addObject("ground.god", sf::Vector2f(800, 1100));
-
+	model.loadFromFile("res/testbed.wd");
+	
 	while (view.isActive()) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			model.addObject("box.god", view.getMousePosition());
-
 		model.update();
 		view.update(model);
 	}
