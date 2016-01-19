@@ -78,5 +78,10 @@ sf::Vector2f GameObject::getOrigin() {
 }
 
 sf::Sprite GameObject::getSprite() {
-
+	sf::Sprite sprite;
+	sprite.setTexture(*texture);
+	sprite.setOrigin(origin);
+	sprite.setPosition(getPosition());
+	sprite.setRotation(getAngle());
+	return sprite;
 }

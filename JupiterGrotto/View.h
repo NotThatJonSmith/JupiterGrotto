@@ -19,14 +19,13 @@ private:
 	void draw();
 
 public:
+
 	View();
 	~View();
 	void update();
 	void attachToScene(Scene *targetScene);
 	bool isActive();
 	sf::Vector2f getMousePosition();
-	sf::Sprite getSpriteFromGameObject(GameObject * object);
-	void setOrigin(sf::Vector2i newOrigin);
 	sf::Vector2i getOrigin();
-	
+	void setOrigin(sf::Vector2i newOrigin);
 };

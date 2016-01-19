@@ -38,11 +38,9 @@ void Scene::removeObject(GameObject * victim) {
 
 void Scene::loadFromFile(std::string fileName) {
 	rapidjson::Document jsonDom = JGUtils::getJsonDom(fileName);
-	
 	const rapidjson::Value& domGravity = jsonDom["gravity"];
 	b2Vec2 gravity(domGravity[0].GetDouble(), domGravity[1].GetDouble());
 	world.SetGravity(gravity);
-
 	const rapidjson::Value& domObjectList = jsonDom["objects"];
 	for (unsigned int i = 0; i < domObjectList.Size(); i++) {
 		const rapidjson::Value& domObjectPlacementVector = domObjectList[i];

@@ -39,4 +39,5 @@ public:
 
 	sf::Texture * getTexture();
 	sf::Vector2f getOrigin();
+	sf::Sprite getSprite();
 };
