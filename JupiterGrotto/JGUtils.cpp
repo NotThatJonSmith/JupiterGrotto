@@ -20,12 +20,4 @@ namespace JGUtils {
 		delete[] jsonBuffer;
 		return jsonDom;
 	}
-
-	b2Vec2 sf2Box(sf::Vector2f sfVector) {
-		return b2Vec2(sfVector.x / SCALE, sfVector.y / SCALE);
-	}
-
-	sf::Vector2f box2Sf(b2Vec2 boxVector) {
-		return sf::Vector2f(boxVector.x * SCALE, boxVector.y * SCALE);
-	}
 }

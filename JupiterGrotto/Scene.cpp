@@ -8,6 +8,8 @@ Scene::~Scene() {
 
 void Scene::update() {
 	world.Step(1 / 60.f, 8, 3);
+	for (std::set<GameObject*>::iterator it = objectsBegin(); it == objectsEnd(); it++)
+		(*it)->update();
 }
 
 void Scene::setGravity(b2Vec2 gravity) {
@@ -32,7 +34,7 @@ void Scene::addObject(std::string baseObjectFileName, sf::Vector2f position) {
 void Scene::removeObject(GameObject * victim) {
 	if (objects.find(victim) == objects.end()) return;
 	objects.erase(victim);
-	world.DestroyBody(victim->body);
+	victim->stopPhysics(world);
 	delete victim;
 }
 
