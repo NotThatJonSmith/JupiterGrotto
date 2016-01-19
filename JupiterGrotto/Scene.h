@@ -6,7 +6,7 @@
 #include "GameObject.h"
 #include "JGUtils.h"
 
-class Model {
+class Scene {
 
 private:
 
@@ -15,8 +15,8 @@ private:
 
 public:
 
-	Model();
-	~Model();
+	Scene();
+	~Scene();
 	void setGravity(b2Vec2 grav);
 	void update();
 	std::set<GameObject*>::iterator objectsBegin();

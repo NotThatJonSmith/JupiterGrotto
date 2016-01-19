@@ -18,13 +18,13 @@ T * ResourceManager::get(std::string resName) {
 	return (T *)it->second;
 }
 
-template sf::Texture * ResourceManager::get(std::string);
-template sf::SoundBuffer * ResourceManager::get(std::string);
-template BaseGameObject * ResourceManager::get(std::string);
-
 void ResourceManager::unloadAllResources() {
 	for (std::unordered_map<std::string, void *>::iterator it = resourceCache.begin();
 		 it != resourceCache.end(); it++)
 		delete it->second;
 	resourceCache.clear();
 }
+
+template sf::Texture * ResourceManager::get(std::string);
+template sf::SoundBuffer * ResourceManager::get(std::string);
+template BaseGameObject * ResourceManager::get(std::string);

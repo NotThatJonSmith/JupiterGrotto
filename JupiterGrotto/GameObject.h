@@ -7,7 +7,6 @@
 class BaseGameObject {
 
 public:
-
 	sf::Texture * texture;
 	sf::Vector2f origin;
 	b2PolygonShape shape;

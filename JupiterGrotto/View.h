@@ -1,5 +1,5 @@
 #include <SFML\Graphics.hpp>
-#include "Model.h"
+#include "Scene.h"
 #include "GameObject.h"
 #include "JGUtils.h"
 
@@ -14,12 +14,14 @@ private:
 	sf::Color bgColor;
 	int pixelDepth;
 	int fpsLimit;
+	Scene *scene;
 
 public:
 
 	View();
 	~View();
-	void update(Model &model);
+	void update();
+	void attachToScene(Scene *targetScene);
 	bool isActive();
 	sf::Vector2f getMousePosition();
 	

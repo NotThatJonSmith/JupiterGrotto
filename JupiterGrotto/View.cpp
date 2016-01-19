@@ -5,7 +5,8 @@ View::View() : title("Jupiter Grotto"),
 			   dimensions(sf::Vector2<int>(1200,1200)),
 			   bgColor(sf::Color::White),
 			   fpsLimit(60),
-			   pixelDepth(32) {
+			   pixelDepth(32),
+			   scene(nullptr)   {
 	window = new sf::RenderWindow(sf::VideoMode((int)dimensions.x, (int)dimensions.y, pixelDepth), title);
 	window->setFramerateLimit(fpsLimit);
 }
@@ -18,7 +19,11 @@ bool View::isActive() {
 	return window->isOpen();
 }
 
-void View::update(Model &model) {
+void View::attachToScene(Scene *targetScene) {
+	scene = targetScene;
+}
+
+void View::update() {
 
 	sf::View winView = window->getView();
 	winView.setSize(dimensions);
@@ -33,7 +38,7 @@ void View::update(Model &model) {
 			dimensions = sf::Vector2f((float)event.size.width, (float)event.size.height);
 
 	window->clear(bgColor);
-	for (std::set<GameObject*>::iterator it = model.objectsBegin(); it != model.objectsEnd(); it++) {
+	for (std::set<GameObject*>::iterator it = scene->objectsBegin(); it != scene->objectsEnd(); it++) {
 		sf::Sprite Sprite;
 		Sprite.setTexture(*((*it)->getTexture()));
 		Sprite.setOrigin((*it)->getOrigin().x, (*it)->getOrigin().y);

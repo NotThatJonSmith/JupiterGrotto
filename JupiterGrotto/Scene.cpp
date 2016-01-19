@@ -1,42 +1,42 @@
-#include "Model.h"
+#include "Scene.h"
 
-Model::Model() : world(b2Vec2(0.f, 0.f)) {}
+Scene::Scene() : world(b2Vec2(0.f, 0.f)) {}
 
-Model::~Model() {
+Scene::~Scene() {
 	while (!objects.empty()) removeObject(*objects.begin());
 }
 
-void Model::update() {
+void Scene::update() {
 	world.Step(1 / 60.f, 8, 3);
 }
 
-void Model::setGravity(b2Vec2 gravity) {
+void Scene::setGravity(b2Vec2 gravity) {
 	world.SetGravity(gravity);
 }
 
-std::set<GameObject*>::iterator Model::objectsBegin() {
+std::set<GameObject*>::iterator Scene::objectsBegin() {
 	return objects.begin();
 }
 
-std::set<GameObject*>::iterator Model::objectsEnd() {
+std::set<GameObject*>::iterator Scene::objectsEnd() {
 	return objects.end();
 }
 
-void Model::addObject(std::string baseObjectFileName, sf::Vector2f position) {
+void Scene::addObject(std::string baseObjectFileName, sf::Vector2f position) {
 	GameObject * addedObject = new GameObject();
 	*addedObject = *ResourceManager::get<BaseGameObject>(baseObjectFileName);
 	addedObject->startPhysics(world, position);
 	objects.insert(addedObject);
 }
 
-void Model::removeObject(GameObject * victim) {
+void Scene::removeObject(GameObject * victim) {
 	if (objects.find(victim) == objects.end()) return;
 	objects.erase(victim);
 	world.DestroyBody(victim->body);
 	delete victim;
 }
 
-void Model::loadFromFile(std::string fileName) {
+void Scene::loadFromFile(std::string fileName) {
 	rapidjson::Document jsonDom = JGUtils::getJsonDom(fileName);
 	
 	const rapidjson::Value& domGravity = jsonDom["gravity"];
