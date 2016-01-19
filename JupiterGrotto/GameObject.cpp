@@ -76,3 +76,7 @@ sf::Texture * GameObject::getTexture() {
 sf::Vector2f GameObject::getOrigin() {
 	return origin;
 }
+
+sf::Sprite GameObject::getSprite() {
+
+}

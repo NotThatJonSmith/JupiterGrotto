@@ -6,14 +6,14 @@
 int main() {
 	
 	Scene scene;
-	View view;
 	scene.loadFromFile("res/testbed.wd");
+
+	View view;
 	view.attachToScene(&scene);
 	
 	while (view.isActive()) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 			scene.addObject("box.god", view.getMousePosition());
-		scene.update();
 		view.update();
 	}
 
